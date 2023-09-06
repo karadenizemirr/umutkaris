@@ -66,7 +66,10 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'Başarılı',
-                            text: 'Websitesi başarıyla eklendi.'
+                            text: 'Websitesi başarıyla eklendi.',
+                            confirmButtonText: 'Tamam'
+                        }).then(function () {
+                            window.location.reload()
                         })
                     } else {
                         Swal.fire({
