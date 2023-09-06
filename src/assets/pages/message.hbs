@@ -1,0 +1,56 @@
+<div class="col-xl-12 col-lg-12 mt-auto mb-auto">
+    <div class="main_title_1 text-center">
+        <div class="card bg-transparent shadow p-4">
+            <div class="card-title">
+                <h3 style="font-size: 20px;">
+                    Mesaj Yayınla
+                </h3>
+            </div>
+            <div class="card-body">
+                <form id="add_message_form">
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Mesajınız" name="message">
+                        </div>
+                        <div class="col">
+                            <input type="number" class="form-control" placeholder="Ne Kadar Sürede Yayınlanacak" name="delay">
+                        </div>
+                    </div>
+                    <div class="card-footer mt-4">
+                        <button class="btn btn-warning" type="submit">Yayınla</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('#add_message_form').submit(function(e){
+            e.preventDefault()
+            let data = $(this).serialize()
+
+            $.ajax({
+                url: '/message',
+                type: 'POST',
+                data: data,
+                success: function(response){
+                    if (response === 'success'){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Başarılı',
+                            text: 'Mesajınız Yayınlandı'
+                        })
+                    }else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Hata',
+                            text: 'Mesajınız Yayınlanamadı'
+                        })
+                    }
+                }
+            })
+        })
+    })
+</script>

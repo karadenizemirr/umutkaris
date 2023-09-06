@@ -1,0 +1,83 @@
+<div class="col-xl-5 col-lg-6 mt-auto mb-auto">
+    <div class="main_title_1 text-center">
+        <div class="card bg-transparent shadow p-4">
+            <div class="card-title">
+                <h3 style="font-size: 20px;">
+                    Websitesi Ekle
+                </h3>
+            </div>
+            <div class="card-body">
+                <form id="add_website_form">
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Başlık" name="title">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="İcon Kodu" name="icon">
+                        </div>
+                    </div>
+                    <div class="form-group mt-4">
+                        <input type="text" class="form-control" placeholder="Websitesi Linki" name="link">
+                    </div>
+                    <div class="card-footer mt-4">
+                        <button class="btn btn-warning" type="submit">Ekle</button>
+                        <button class="btn btn-success">Siteler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-xl-7 col-lg-6 mt-auto mb-auto">
+    <table class="table">
+        <thead class="text-white text-center">
+            <tr>
+                <th scope="col">Website</th>
+                <th scope="col">İşlem</th>
+            </tr>
+        </thead>
+        <tbody class="text-white text-center">
+            {{#each data}}
+            <tr>
+                <td>
+                    {{this.link}}
+                </td>
+                <td>
+                    <a href="/website/delete/{{this.id}}" class="btn btn-danger btn-sm">
+                        Sil
+                    </a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#add_website_form').submit(function (e) {
+            e.preventDefault()
+
+            $.ajax({
+                url: '/website',
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function (data) {
+                    if (data === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Başarılı',
+                            text: 'Websitesi başarıyla eklendi.'
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Hata',
+                            text: 'Websitesi eklenirken bir hata oluştu.'
+                        })
+                    }
+                }
+            })
+        })
+    })
+</script>
