@@ -5,8 +5,6 @@ import { Website } from "src/models/website.model";
 import { ChatgptService } from "./chatgpt.service";
 import { Settings } from "src/models/settings.model";
 import { Book } from "src/models/book.model";
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from "typeorm";
 
 
 @Injectable()
@@ -23,7 +21,7 @@ export class TelegramService {
 
     private async initialize() {
 
-        const token = "6171892397:AAFs5JRUweIq1QmGBCAeYzNRli-yZjHGHSw"
+        const token = "6619609707:AAHXbahBs0MU5c0ZKwX96N-5R1k-7QV1r8c"
 
         this.websiteRepository = AppDataSource.getRepository(Website)
         this.bookRepository = AppDataSource.getRepository(Book)
@@ -48,7 +46,7 @@ export class TelegramService {
             if (message_control.toLowerCase().includes('true')) {
 
                 this.bot.deleteMessage(chatId, msg.message_id)
-                const message = `❌ Mesajınızda uygunsuz bir kelime tespit edildiMesajınız silindi -> ${username}`;
+                const message = `❌ Mesajınızda uygunsuz bir kelime tespit edildi Mesajınız silindi -> ${username}`;
                 this.bot.sendMessage(chatId, message);
             }
 
@@ -85,19 +83,28 @@ export class TelegramService {
                 const websites = await this.websiteRepository.find()
                 let buttons = []
 
-                for (const website of websites) {
-                    let title:string = ''
+                for (let i = 0; i < websites.length; i += 2) {
+                    const website1 = websites[i]
+                    const website2 = websites[i + 1]
 
-                    if (website.title === 'Onwine'){
-                        title = '🔥' + website.icon + ' ' + website.title
-                    }else if (website.title === 'MatadorBet'){
-                        title = '🔥' + website.icon + ' ' + website.title
+                    let title1 = website1.icon + ' ' + website1.title
+                    let title2 = website2 ? website2.icon + ' ' + website2.title : ''
+
+                    if (website1.title === 'Onwine') {
+                        title1 = '🔥' + title1
+                    } else if (website1.title === 'MatadorBet') {
+                        title1 = '🔥' + title1
                     }
 
-                    title = website.icon + ' ' + website.title
+                    if (website2 && website2.title === 'Onwine') {
+                        title2 = '🔥' + title2
+                    } else if (website2 && website2.title === 'MatadorBet') {
+                        title2 = '🔥' + title2
+                    }
 
                     buttons.push([
-                        { text: title, url: website.link },
+                        { text: title1, url: website1.link },
+                        { text: title2, url: website2 ? website2.link : '' },
                     ])
                 }
 
@@ -111,8 +118,8 @@ export class TelegramService {
                 };
 
                 this.bot.sendMessage(
-                    chatId, 
-                    `👉 <strong>${username} Güvenilir Sponsorumuz Olan Tüm Sitelerimiz Aşağıda Mevcuttur.\nGönül Rahatlığı ile yatırım yapabilirsiniz. 👈 </strong>`, 
+                    chatId,
+                    `👉 <strong>${username} Güvenilir Sponsorumuz Olan Tüm Sitelerimiz Aşağıda Mevcuttur.\nGönül Rahatlığı ile yatırım yapabilirsiniz. 👈 </strong>`,
                     replyMarkup)
             }
             const warning_message = `
@@ -124,6 +131,7 @@ export class TelegramService {
                 -Para istemek ve para göndermek
                 -Ürün satışı yapmak
             `
+
 
             const delay: number = 7200
 
