@@ -133,16 +133,7 @@ export class TelegramService {
                 )
 
                 for (let i = 0; i < websites.length - 1; i += 2) {
-                    const website1 = websites[i] || '';
-                    const website2 = websites[i + 1] || '';
-
-                    let title1 = `💥 ${website1?.title || ''} 💥`;
-                    let title2 = `💥 ${website2?.title || ''} 💥`;
-
-                    buttons.push([
-                        { text: title1, url: website1 ? website1?.link : '' },
-                        { text: title2, url: website2 ? website2?.link : '' },
-                    ]);
+                    console.log(websites[i].title)
                 }
 
                 const keyboard = {
@@ -156,7 +147,7 @@ export class TelegramService {
 
                 this.bot.sendMessage(
                     chatId,
-                    `👉 <strong><a href="https://t.me/${userId}" >${username}</a> Güvenilir Sponsorumuz Olan Tüm Sitelerimiz Aşağıda Mevcuttur.\nGönül Rahatlığı ile yatırım yapabilirsiniz. 👈 </strong>`,
+                    `<strong><a href="https://t.me/${userId}" >${username}</a> Güvendiğimiz ve Önerdiğimiz Sitelere Aşağıdaki Linklerden Ulaşabilirsiniz.</strong>`,
                     replyMarkup)
             }
             const warning_message = `
