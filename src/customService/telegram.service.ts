@@ -33,17 +33,6 @@ export class TelegramService {
             const chatId = msg.chat.id;
             const userId = msg.from.id;
 
-            const warning_message = `
-            Lütfen aşağıdaki maddelerin <underline>YASAK</underline> olduğunu unutmayın\n
-            -Küfür, hakaret, ırkçılık ve cinsiyetçilik içeren mesajları atmak
-            -Bağlantımız olmayan sitelerden bahsetmek
-            -Referans link paylaşmak
-            -Başka grupların ve kanalların reklamını yapmak
-            -Para istemek ve para göndermek
-            -Ürün satışı yapmak
-        `
-            this.bot.sendMessage(chatId, warning_message, { parse_mode: 'HTML' })
-
             // Get Username
             const username = (await this.bot.getChatMember(chatId, userId)).user.first_name
 
@@ -163,13 +152,20 @@ export class TelegramService {
                     replyMarkup)
             }
 
+            const warning_message = `
+                <strong>Lütfen aşağıdaki maddelerin <u>YASAK</u> olduğunu unutmayın
+                -Küfür, hakaret, ırkçılık ve cinsiyetçilik içeren mesajlar
+                -Bağlantımız olmayan sitelerden bahsetmek
+                -Referans link paylaşmak
+                -Başka grupların ve kanalların reklamını yapmak
+                -Para istemek ve para göndermek
+                -Ürün satışı yapmak</strong>
+            `
+            const delay: number = 43200
 
-
-            // const delay: number = 10
-
-            // setTimeout(async () => {
-            //     this.bot.sendMessage(chatId, warning_message, { parse_mode: 'HTML' })
-            // }, delay * 1000)
+            setTimeout(async () => {
+                this.bot.sendMessage(chatId, warning_message, { parse_mode: 'HTML' })
+            }, delay * 1000)
         })
 
         this.bot.on('polling_error', (err) => {
