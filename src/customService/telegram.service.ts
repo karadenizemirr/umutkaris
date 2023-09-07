@@ -77,38 +77,27 @@ export class TelegramService {
                     parse_mode: 'HTML'
                 }
 
-                this.bot.sendMessage(chatId, `👉 <strong><a href="https://t.me/${userId}" >${username}</a> Kitaplarımız Aşağıda Mevcuttur.</strong> 👈`, replyMarkup);
+                this.bot.sendMessage(chatId, `<strong><a href="https://t.me/${userId}" >${username}</a> Kitaplarımız Aşağıda Mevcuttur.</strong>`, replyMarkup);
             }
 
             if (text.includes('site')) {
                 const websites = await this.websiteRepository.find()
                 let buttons = []
+                const metador_text = `🔥 ${websites[0].title || ''} 🔥`
                 buttons.push(
                     [
                         {
-                            text: websites[0].title, url: websites[0].link
+                            text: metador_text, url: websites[0].link
                         }
                     ]
                 )
 
-                for (let i = 0; i < websites.length; i += 2) {
+                for (let i = 1; i < websites.length; i += 2) {
                     const website1 = websites[i]
                     const website2 = websites[i + 1]
 
                     let title1 = '' + website1.title
                     let title2 = website2 ? website2.icon + ' ' + website2.title : ''
-
-                    if (website1.title === 'Onwine') {
-                        title1 = '🔥' + title1
-                    } else if (website1.title === 'MatadorBet') {
-                        title1 = '🔥' + title1
-                    }
-
-                    if (website2 && website2.title === 'Onwine') {
-                        title2 = '🔥' + title2
-                    } else if (website2 && website2.title === 'MatadorBet') {
-                        title2 = '🔥' + title2
-                    }
 
                     buttons.push([
                         { text: title1, url: website1.link },
