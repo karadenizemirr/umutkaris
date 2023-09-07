@@ -41,15 +41,15 @@ export class TelegramService {
             const settings = await this.settingsRepository.findOne({ where: { id: 1 } })
 
             // Message Control
-            const token = settings.openai_key
-            const message_control = await this.chatgptService.detector(token, text)
+            // const token = settings.openai_key
+            // const message_control = await this.chatgptService.detector(token, text)
 
-            if (message_control.toLowerCase().includes('true')) {
+            // if (message_control.toLowerCase().includes('true')) {
 
-                this.bot.deleteMessage(chatId, msg.message_id)
-                const message = `❌ <strong>Mesajınızda uygunsuz bir kelime tespit edildi Mesajınız silindi -> <a href="https://t.me/${userId}" >${username}</a></strong> ❌`;
-                this.bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
-            }
+            //     this.bot.deleteMessage(chatId, msg.message_id)
+            //     const message = `❌ <strong>Mesajınızda uygunsuz bir kelime tespit edildi Mesajınız silindi -> <a href="https://t.me/${userId}" >${username}</a></strong> ❌`;
+            //     this.bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
+            // }
 
             if (text.toLowerCase().includes('kitap')) {
                 const books = await this.bookRepository.find()
@@ -136,6 +136,15 @@ export class TelegramService {
                 if (betSorspinButton) {
                     buttons.push([betSorspinButton]);
                 }
+
+                buttons.push(
+                    [
+                        {
+                            text: 'Sitelerin Devamı',
+                            url: 'https://heylink.me/SlotAbim/'
+                        }
+                    ]
+                )
 
                 const keyboard = {
                     inline_keyboard: buttons,
