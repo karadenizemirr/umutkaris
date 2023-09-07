@@ -64,6 +64,18 @@ export class TelegramService {
 
                 buttons.push([
                     {
+                        text: 'Instagram - Slotistan',
+                        url: 'https://www.instagram.com/slotistann/',
+                    },
+                    {
+                        text: 'Instagram - Slotistan2',
+                        url: 'https://www.instagram.com/slotistan2/'
+                    },
+                    {
+                        text: 'Instagram - Slotabim',
+                        url: 'https://www.instagram.com/slotabim/'
+                    },
+                    {
                         text: '📹 Youtube - Slotistan 📹',
                         url: 'https://youtube.com/@slotistan?si=yHqU7kqCmCxXoWqb'
                     },
@@ -77,7 +89,7 @@ export class TelegramService {
                     parse_mode: 'HTML'
                 }
 
-                this.bot.sendMessage(chatId, `<strong><a href="https://t.me/${userId}" >${username}</a> Kitaplarımız Aşağıda Mevcuttur.</strong>`, replyMarkup);
+                this.bot.sendMessage(chatId, `<strong><a href="https://t.me/${userId}" >${username}</a> Kitap ve Sosyal Medya Hesapları Aşağıda Mevcuttur.</strong>`, replyMarkup);
             }
 
             if (text.includes('site')) {
@@ -92,7 +104,7 @@ export class TelegramService {
                     ]
                 )
 
-                for (let i = 0; i < websites.length; i += 2) {
+                for (let i = 1; i < websites.length; i += 2) {
                     const website1 = websites[i]
                     const website2 = websites[i + 1]
 
