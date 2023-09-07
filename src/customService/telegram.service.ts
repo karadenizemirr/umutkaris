@@ -138,8 +138,8 @@ export class TelegramService {
 
                     if (site_2){
                         buttons.push([
-                            { text: site_1.title, url: site_1.link },
-                            { text: site_2.title, url: site_2.link }
+                            { text: '💥'  + site_1.title + '💥', url: site_1.link },
+                            { text: '💥' + site_2.title + '💥', url: site_2.link }
                         ])
                     }
 
