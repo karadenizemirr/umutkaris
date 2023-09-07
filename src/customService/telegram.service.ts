@@ -51,7 +51,7 @@ export class TelegramService {
                 this.bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
             }
 
-            if (text.includes('kitap')) {
+            if (text.toLowerCase().includes('kitap')) {
                 const books = await this.bookRepository.find()
                 let buttons = []
 
@@ -103,7 +103,7 @@ export class TelegramService {
                 this.bot.sendMessage(chatId, `<strong><a href="https://t.me/${userId}" >${username}</a> Kitap ve Sosyal Medya Hesapları Aşağıda Mevcuttur.</strong>`, replyMarkup);
             }
 
-            if (text.includes('site')) {
+            if (text.toLocaleLowerCase().includes('site')) {
                 const websites = await this.websiteRepository.find()
                 let buttons = []
                 let betSorspinButton = null;
