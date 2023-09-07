@@ -99,12 +99,12 @@ export class TelegramService {
                 buttons.push(
                     [
                         {
-                            text: websites[0].title, url: websites[0].link
+                            text: '🔥' + websites[0].title + '🔥', url: websites[0].link
                         }
                     ]
                 )
 
-                for (let i = 0; i < websites.length; i += 2) {
+                for (let i = 1; i < websites.length; i += 2) {
                     const website1 = websites[i]
                     const website2 = websites[i + 1]
 
