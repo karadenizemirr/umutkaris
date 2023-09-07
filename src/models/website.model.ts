@@ -11,9 +11,6 @@ export class Website {
     @Column()
     title: string
 
-    @Column()
-    icon:string
-
     @CreateDateColumn()
     created_at: Date
 }

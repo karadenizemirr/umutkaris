@@ -15,7 +15,6 @@ export class WebsiteService {
             const website = new Website()
             website.title = data.title
             website.link = data.link
-            website.icon = data.icon
 
             await this.websiteRepository.save(website)
 
