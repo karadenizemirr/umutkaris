@@ -111,16 +111,6 @@ export class TelegramService {
                     let title1 = '💥' + website1.title + '💥'
                     let title2 = website2 ? '💥' + website2.title + '💥' : '';
 
-                    // if (website1.title === 'Onwine') {
-                    //     title1 = '🔥' + title1
-                    // } else if (website1.title === 'MatadorBet') {
-                    //     title1 = '🔥' + title1
-                    // }
-
-                    // if (website2 && website2.title === 'MatadorBet') {
-                    //     title2 = '🔥' + title2
-                    // }
-
                     buttons.push([
                         { text: title1, url: website1.link },
                         { text: title2, url: website2 ? website2.link : '' },
