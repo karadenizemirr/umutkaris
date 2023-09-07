@@ -28,27 +28,10 @@ export class TelegramService {
         this.settingsRepository = AppDataSource.getRepository(Settings)
 
         this.bot = new TelegramBot(token, { polling: true })
-        let isFirstMessage = true
 
         this.bot.on('message', async (msg) => {
             const chatId = msg.chat.id;
             const userId = msg.from.id;
-
-            if (isFirstMessage){
-                            // Welcome Message
-            const welcomeMessage = `
-                <strong>Lütfen aşağıdaki maddelerin <underline>YASAK</underline> olduğunu unutmayın\n
-                -Küfür, hakaret, ırkçılık ve cinsiyetçilik içeren mesajları atmak
-                -Bağlantımız olmayan sitelerden bahsetmek
-                -Referans link paylaşmak
-                -Başka grupların ve kanalların reklamını yapmak
-                -Para istemek ve para göndermek
-                -Ürün satışı yapmak</strong>
-                 `;
-        
-                this.bot.sendMessage(chatId, welcomeMessage, { parse_mode: 'HTML' });
-                isFirstMessage = false
-            }
 
             // Get Username
             const username = (await this.bot.getChatMember(chatId, userId)).user.first_name
@@ -141,6 +124,9 @@ export class TelegramService {
                     if (site_2) {
                         if (site_1.title === "BetOrSpin" && site_2.title === "BetOrSpin") {
                             betSorspinButton = { text: '💥' + site_1.title + '💥', url: site_1.link };
+
+                            console.log('burada')
+                            console.log(betSorspinButton)
                         } else {
                             buttons.push([
                                 { text: '💥' + site_1.title + '💥', url: site_1.link },
@@ -179,7 +165,7 @@ export class TelegramService {
             `
 
 
-            const delay: number = 7200
+            const delay: number = 86400
 
             setTimeout(async () => {
                 this.bot.sendMessage(chatId, warning_message, { parse_mode: 'HTML' })
