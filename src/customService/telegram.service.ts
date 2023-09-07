@@ -132,17 +132,17 @@ export class TelegramService {
                     ]
                 )
 
-                for (let i = 1; i < websites.length; i += 2) {
-                    const website1 = websites[i] || ''
-                    const website2 = websites[i + 1] || ''
+                for (let i = 0; i < websites.length - 1; i += 2) {
+                    const website1 = websites[i] || '';
+                    const website2 = websites[i + 1] || '';
 
-                    let title1 = `💥 ${website1?.title || ''} 💥`
-                    let title2 = `💥 ${website2?.title || ''} 💥`
+                    let title1 = `💥 ${website1?.title || ''} 💥`;
+                    let title2 = `💥 ${website2?.title || ''} 💥`;
 
                     buttons.push([
-                        { text: title1, url: website1 ? website1?.link: '' },
+                        { text: title1, url: website1 ? website1?.link : '' },
                         { text: title2, url: website2 ? website2?.link : '' },
-                    ])
+                    ]);
                 }
 
                 const keyboard = {
