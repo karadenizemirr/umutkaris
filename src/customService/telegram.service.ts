@@ -28,9 +28,27 @@ export class TelegramService {
         this.settingsRepository = AppDataSource.getRepository(Settings)
 
         this.bot = new TelegramBot(token, { polling: true })
+        let isFirstMessage = true
+
         this.bot.on('message', async (msg) => {
             const chatId = msg.chat.id;
             const userId = msg.from.id;
+
+            if (isFirstMessage){
+                            // Welcome Message
+            const welcomeMessage = `
+                <strong>Lütfen aşağıdaki maddelerin <underline>YASAK</underline> olduğunu unutmayın\n
+                -Küfür, hakaret, ırkçılık ve cinsiyetçilik içeren mesajları atmak
+                -Bağlantımız olmayan sitelerden bahsetmek
+                -Referans link paylaşmak
+                -Başka grupların ve kanalların reklamını yapmak
+                -Para istemek ve para göndermek
+                -Ürün satışı yapmak</strong>
+                 `;
+        
+                this.bot.sendMessage(chatId, welcomeMessage, { parse_mode: 'HTML' });
+                isFirstMessage = false
+            }
 
             // Get Username
             const username = (await this.bot.getChatMember(chatId, userId)).user.first_name
