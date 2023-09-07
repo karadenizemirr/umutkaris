@@ -19,7 +19,7 @@ export class ChatgptService {
                 messages: [
                     {role: 'user', content: 'Sana vereceğim mesajı oku ve aşağıda sana vereceğim adımlara göre mesajı analiz et.'},
                     {role: 'user', content: 'Mesaj küfür, cinsiyetçilik, ırkçılık içeriyorsa true değerini döndür. İçermiyorsa false değerini döndür ve "amk" kelimesi varsa false döndür.'},
-                    {role: 'user', content: 'amk kelimesini küfür olarak algılama.'},
+                    {role: 'user', content: '"amk, Amk, AMK, aMK" kelimelerini küfür olarak algılama.'},
                     {role: 'user', content: '"ortak kasa" ifadesi varsa true döndür.'},
                     {role: 'user', content: 'işte analiz yapacağın mesaj: ' + text},
 
