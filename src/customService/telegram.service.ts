@@ -162,7 +162,7 @@ export class TelegramService {
             `
 
 
-            const delay: number = 86400
+            const delay: number = 10
 
             setTimeout(async () => {
                 this.bot.sendMessage(chatId, warning_message, { parse_mode: 'HTML' })
