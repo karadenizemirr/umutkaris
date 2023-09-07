@@ -31,7 +31,7 @@
     <table class="table">
         <thead class="text-white text-center">
             <tr>
-                <th scope="col">Website</th>
+                <th scope="col">Adı</th>
                 <th scope="col">İşlem</th>
             </tr>
         </thead>
@@ -39,7 +39,7 @@
             {{#each data}}
             <tr>
                 <td>
-                    {{this.link}}
+                    {{this.name}}
                 </td>
                 <td>
                     <a href="/website/delete/{{this.id}}" class="btn btn-danger btn-sm">
