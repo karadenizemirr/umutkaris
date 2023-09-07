@@ -85,11 +85,11 @@ export class TelegramService {
                 
                 buttons.push([
                     {
-                        text: '📹 Youtube - Slotistan 📹',
+                        text: 'Youtube - Slotistan',
                         url: 'https://youtube.com/@slotistan?si=yHqU7kqCmCxXoWqb'
                     }
                 ]);
-                
+
                 const keyboard = {
                     inline_keyboard: buttons,
                 }
