@@ -124,9 +124,6 @@ export class TelegramService {
                     if (site_2) {
                         if (site_1.title === "BetOrSpin" || site_2.title === "BetOrSpin") {
                             betSorspinButton = { text: '🔥' + site_1.title + '🔥', url: site_1.link };
-
-                            console.log('burada')
-                            console.log(betSorspinButton)
                         } else {
                             buttons.push([
                                 { text: '💥' + site_1.title + '💥', url: site_1.link },

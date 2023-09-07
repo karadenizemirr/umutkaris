@@ -17,16 +17,15 @@ export class ChatgptService {
         const response = await this.openai.chat.completions.create(
             {
                 messages: [
-
-                    { role: 'user', content: 'Sana gelen metin içerisinde şimdi bahsedeceğim maddelerden birisi varsa bana true döndür. Yoksa false döndür.' },
-                    { role: 'user', content: 'Metin içerisinde küfür,hakaret,ırkçılık ve cinsiyetçilik varsa true döndür.' },
-                    { role: 'user', content: 'Referans link varsa' },
-                    { role: 'user', content: 'Başka grupların ve kanalların reklamı varsa' },
-                    { role: 'user', content: 'Para isteyen ya da para göndermek isteyen varsa' },
-                    { role: 'user', content: 'ürün satışı varsa' },
-                    { role: 'user', content: 'Mesaj içeriğinde bunlardan birisi ile karşılaşırsan true değeri döndür.' },
-                    {role: 'user', content:'mesaj sadece site ya da kitap ise false döndür.'},
-                    { role: 'user', content: 'İşte arama yağacağın metin: ' + text },
+                    {role: 'user', content: 'Sana vereceğim mesajı oku ve aşağıda sana vereceğim adımlara göre mesajı analiz et.'},
+                    {role: 'user', content: 'Mesaj küfür, cinsiyetçilik, ırkçılık içeriyorsa true değerini döndür. İçermiyorsa false değerini döndür ve "amk" kelimesi varsa false döndür.'},
+                    {role: 'user', content: 'Para istemek ya da para göndermekle alakalı içerik varsa true döndür.'},
+                    {role: 'user', content: 'Reklam ya da spam içerik varsa true döndür.'},
+                    {role: 'user', content: 'amk kelimesini küfür olarak algılama.'},
+                    {role: 'user', content: '"ortak kasa" ifadesi varsa true döndür.'},
+                    {role: 'user', content: '"site linki" varsa true değerini döndür.'},
+                    {role: 'user', content: 'grup linki varsa true değerini döndür.'},
+                    {role: 'user', content: 'işte analiz yapacağın mesaj: ' + text},
 
                 ],
                 model: 'gpt-3.5-turbo-16k'
