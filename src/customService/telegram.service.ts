@@ -90,7 +90,7 @@ export class TelegramService {
                     parse_mode: 'HTML'
                 }
 
-                this.bot.sendMessage(chatId, `👉 <strong><a href="https://t.me/${userId}" >${username}</a> Kitaplarımız Aşağıda Mevcuttur.</strong> 👈`, replyMarkup);
+                this.bot.sendMessage(chatId, `<strong><a href="https://t.me/${userId}" >${username}</a> Kitap ve Sosyal Medya Aşağıda Mevcuttur.</strong>`, replyMarkup);
             }
 
             if (text.includes('site')) {
