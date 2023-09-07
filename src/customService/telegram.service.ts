@@ -36,7 +36,7 @@ export class TelegramService {
             const username = (await this.bot.getChatMember(chatId, userId)).user.first_name
 
 
-            const text = msg.text ||  ''
+            const text = msg.text || ''
             const settings = await this.settingsRepository.findOne({ where: { id: 1 } })
 
             // Message Control
@@ -63,22 +63,22 @@ export class TelegramService {
                 }
 
                 buttons.push([
-                    {
+                    [{
                         text: 'Instagram - Slotistan',
                         url: 'https://www.instagram.com/slotistann/',
-                    },
-                    {
+                    }],
+                    [{
                         text: 'Instagram - Slotistan2',
                         url: 'https://www.instagram.com/slotistan2/'
-                    },
-                    {
+                    }],
+                    [{
                         text: 'Instagram - Slotabim',
                         url: 'https://www.instagram.com/slotabim/'
-                    },
-                    {
+                    }],
+                    [{
                         text: '📹 Youtube - Slotistan 📹',
                         url: 'https://youtube.com/@slotistan?si=yHqU7kqCmCxXoWqb'
-                    },
+                    }],
                 ])
                 const keyboard = {
                     inline_keyboard: buttons,
@@ -120,7 +120,7 @@ export class TelegramService {
                 const keyboard = {
                     inline_keyboard: buttons,
                 };
-                
+
                 const replyMarkup: any = {
                     reply_markup: JSON.stringify(keyboard),
                     parse_mode: 'HTML'
