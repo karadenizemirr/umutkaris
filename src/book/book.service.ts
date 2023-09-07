@@ -15,7 +15,6 @@ export class BookService {
             const book = new Book()
             book.name = data.name
             book.link = data.link
-            book.social = data.social
 
             await this.bookRepository.save(book)
 
