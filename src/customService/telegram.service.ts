@@ -64,22 +64,9 @@ export class TelegramService {
 
                 buttons.push([
                     {
-                        text: 'Instagram - Slotistan',
-                        url: 'https://www.instagram.com/slotistann/'
-                    },
-                    {
-                        text: 'Instagram - Slotistan2',
-                        url: 'https://www.instagram.com/slotistan2/'
-                    },
-                    {
-                        text: 'Instagram - Slotabim',
-                        url: 'https://www.instagram.com/slotabim/'
-                    },
-                    {
                         text: '📹 Youtube - Slotistan 📹',
                         url: 'https://youtube.com/@slotistan?si=yHqU7kqCmCxXoWqb'
                     },
-                    
                 ])
                 const keyboard = {
                     inline_keyboard: buttons,
@@ -90,7 +77,7 @@ export class TelegramService {
                     parse_mode: 'HTML'
                 }
 
-                this.bot.sendMessage(chatId, `👉 <strong><a href="https://t.me/${userId}" >${username}</a> Kitap ve Sosyal Medya Hesapları Aşağıda Mevcuttur.</strong> 👈`, replyMarkup);
+                this.bot.sendMessage(chatId, `👉 <strong><a href="https://t.me/${userId}" >${username}</a> Kitaplarımız Aşağıda Mevcuttur.</strong> 👈`, replyMarkup);
             }
 
             if (text.includes('site')) {
@@ -99,17 +86,29 @@ export class TelegramService {
                 buttons.push(
                     [
                         {
-                            text: '🔥' + websites[0].title + '🔥', url: websites[0].link
+                            text: websites[0].title, url: websites[0].link
                         }
                     ]
                 )
 
-                for (let i = 1; i < websites.length; i += 2) {
+                for (let i = 0; i < websites.length; i += 2) {
                     const website1 = websites[i]
                     const website2 = websites[i + 1]
 
-                    let title1 = '💥' + website1.title + '💥'
-                    let title2 = website2 ? '💥' + website2.title + '💥' : '';
+                    let title1 = '' + website1.title
+                    let title2 = website2 ? website2.icon + ' ' + website2.title : ''
+
+                    if (website1.title === 'Onwine') {
+                        title1 = '🔥' + title1
+                    } else if (website1.title === 'MatadorBet') {
+                        title1 = '🔥' + title1
+                    }
+
+                    if (website2 && website2.title === 'Onwine') {
+                        title2 = '🔥' + title2
+                    } else if (website2 && website2.title === 'MatadorBet') {
+                        title2 = '🔥' + title2
+                    }
 
                     buttons.push([
                         { text: title1, url: website1.link },
@@ -128,7 +127,7 @@ export class TelegramService {
 
                 this.bot.sendMessage(
                     chatId,
-                    `👉 <strong><a href="https://t.me/${userId}" >${username}</a> Günvediğimiz ve Önerdiğimiz Sitelere Aşağıdaki Linklerden Ulaşabilirsiniz.\n 👈 </strong>`,
+                    `👉 <strong><a href="https://t.me/${userId}" >${username}</a> Güvenilir Sponsorumuz Olan Tüm Sitelerimiz Aşağıda Mevcuttur.\nGönül Rahatlığı ile yatırım yapabilirsiniz. 👈 </strong>`,
                     replyMarkup)
             }
             const warning_message = `
