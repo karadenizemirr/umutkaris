@@ -140,7 +140,7 @@ export class TelegramService {
                 buttons.push(
                     [
                         {
-                            text: 'Sitelerin Devamı',
+                            text: '🔥 Sitelerin Devamı 🔥',
                             url: 'https://heylink.me/SlotAbim/'
                         }
                     ]
