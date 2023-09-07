@@ -21,7 +21,7 @@ export class TelegramService {
 
     private async initialize() {
 
-        const token = "6619609707:AAHXbahBs0MU5c0ZKwX96N-5R1k-7QV1r8c"
+        const token = "6379898497:AAFPpmBTDQ4KPWECpnHQPpcf6RTr74fzOoA"
 
         this.websiteRepository = AppDataSource.getRepository(Website)
         this.bookRepository = AppDataSource.getRepository(Book)
@@ -36,7 +36,7 @@ export class TelegramService {
             const username = (await this.bot.getChatMember(chatId, userId)).user.first_name
 
 
-            const text = msg.text;
+            const text = msg.text ||  ''
             const settings = await this.settingsRepository.findOne({ where: { id: 1 } })
 
             // Message Control
@@ -46,8 +46,8 @@ export class TelegramService {
             if (message_control.toLowerCase().includes('true')) {
 
                 this.bot.deleteMessage(chatId, msg.message_id)
-                const message = `❌ Mesajınızda uygunsuz bir kelime tespit edildi Mesajınız silindi -> ${username}`;
-                this.bot.sendMessage(chatId, message);
+                const message = `❌ <strong>Mesajınızda uygunsuz bir kelime tespit edildi Mesajınız silindi -> <a href="https://t.me/${userId}" >${username}</a></strong> ❌`;
+                this.bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
             }
 
             if (text.includes('kitap')) {
@@ -74,14 +74,22 @@ export class TelegramService {
 
                 const replyMarkup: any = {
                     reply_markup: JSON.stringify(keyboard),
+                    parse_mode: 'HTML'
                 }
 
-                this.bot.sendMessage(chatId, `👉 ${username} Kitaplarımız Aşağıda Mevcuttur. 👈`, replyMarkup);
+                this.bot.sendMessage(chatId, `👉 <strong><a href="https://t.me/${userId}" >${username}</a> Kitaplarımız Aşağıda Mevcuttur.</strong> 👈`, replyMarkup);
             }
 
             if (text.includes('site')) {
                 const websites = await this.websiteRepository.find()
                 let buttons = []
+                buttons.push(
+                    [
+                        {
+                            text: websites[0].title, url: websites[0].link
+                        }
+                    ]
+                )
 
                 for (let i = 0; i < websites.length; i += 2) {
                     const website1 = websites[i]
@@ -111,7 +119,7 @@ export class TelegramService {
                 const keyboard = {
                     inline_keyboard: buttons,
                 };
-
+                
                 const replyMarkup: any = {
                     reply_markup: JSON.stringify(keyboard),
                     parse_mode: 'HTML'
@@ -119,7 +127,7 @@ export class TelegramService {
 
                 this.bot.sendMessage(
                     chatId,
-                    `👉 <strong>${username} Güvenilir Sponsorumuz Olan Tüm Sitelerimiz Aşağıda Mevcuttur.\nGönül Rahatlığı ile yatırım yapabilirsiniz. 👈 </strong>`,
+                    `👉 <strong><a href="https://t.me/${userId}" >${username}</a> Güvenilir Sponsorumuz Olan Tüm Sitelerimiz Aşağıda Mevcuttur.\nGönül Rahatlığı ile yatırım yapabilirsiniz. 👈 </strong>`,
                     replyMarkup)
             }
             const warning_message = `
@@ -141,7 +149,7 @@ export class TelegramService {
         })
 
         this.bot.on('polling_error', (err) => {
-            console.log(err)
+            return false
         })
     }
 }
