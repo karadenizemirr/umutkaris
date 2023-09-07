@@ -33,6 +33,17 @@ export class TelegramService {
             const chatId = msg.chat.id;
             const userId = msg.from.id;
 
+            const warning_message = `
+            Lütfen aşağıdaki maddelerin <underline>YASAK</underline> olduğunu unutmayın\n
+            -Küfür, hakaret, ırkçılık ve cinsiyetçilik içeren mesajları atmak
+            -Bağlantımız olmayan sitelerden bahsetmek
+            -Referans link paylaşmak
+            -Başka grupların ve kanalların reklamını yapmak
+            -Para istemek ve para göndermek
+            -Ürün satışı yapmak
+        `
+            this.bot.sendMessage(chatId, warning_message, { parse_mode: 'HTML' })
+
             // Get Username
             const username = (await this.bot.getChatMember(chatId, userId)).user.first_name
 
@@ -151,23 +162,14 @@ export class TelegramService {
                     `<strong><a href="https://t.me/${userId}" >${username}</a> Güvendiğimiz ve Önerdiğimiz Sitelere Aşağıdaki Linklerden Ulaşabilirsiniz.</strong>`,
                     replyMarkup)
             }
-            const warning_message = `
-                Lütfen aşağıdaki maddelerin <underline>YASAK</underline> olduğunu unutmayın\n
-                -Küfür, hakaret, ırkçılık ve cinsiyetçilik içeren mesajları atmak
-                -Bağlantımız olmayan sitelerden bahsetmek
-                -Referans link paylaşmak
-                -Başka grupların ve kanalların reklamını yapmak
-                -Para istemek ve para göndermek
-                -Ürün satışı yapmak
-            `
-            this.bot.sendMessage(chatId, warning_message, { parse_mode: 'HTML' })
 
 
-            const delay: number = 10
 
-            setTimeout(async () => {
-                this.bot.sendMessage(chatId, warning_message, { parse_mode: 'HTML' })
-            }, delay * 1000)
+            // const delay: number = 10
+
+            // setTimeout(async () => {
+            //     this.bot.sendMessage(chatId, warning_message, { parse_mode: 'HTML' })
+            // }, delay * 1000)
         })
 
         this.bot.on('polling_error', (err) => {
