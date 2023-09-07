@@ -25,7 +25,8 @@ export class ChatgptService {
                     { role: 'user', content: 'Para isteyen ya da para göndermek isteyen varsa' },
                     { role: 'user', content: 'ürün satışı varsa' },
                     { role: 'user', content: 'Metin içerisinde arayacakların bunlar. Bunlardan birisi ile karşılaşırsan true değeri döndür.' },
-                    { role: 'user', content: 'İşte arama yağacağın metin: ' + text }
+                    { role: 'user', content: 'İşte arama yağacağın metin: ' + text },
+                    {role: 'user', content: 'Ancak sen herşeye true döndürüyorsun. Metini tekrar kontrol et.'}
 
                 ],
                 model: 'gpt-3.5-turbo-16k'
