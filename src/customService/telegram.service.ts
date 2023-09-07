@@ -132,8 +132,17 @@ export class TelegramService {
                     ]
                 )
 
-                for (let i = 0; i < websites.length - 1; i += 2) {
-                    console.log(websites[i].title)
+                for (let i = 1; i < websites.length - 1; i += 2) {
+                    let site_1 = websites[i]
+                    let site_2 = websites[i + 1]
+
+                    if (site_2){
+                        buttons.push([
+                            { text: site_1.title, url: site_1.link },
+                            { text: site_2.title, url: site_2.link }
+                        ])
+                    }
+
                 }
 
                 const keyboard = {
