@@ -139,7 +139,7 @@ export class TelegramService {
                     let site_2 = websites[i + 1];
                 
                     if (site_2) {
-                        if (site_1.title === "betsorspin" && site_2.title === "betsorspin") {
+                        if (site_1.title === "BetOrSpin" && site_2.title === "BetOrSpin") {
                             betSorspinButton = { text: '💥' + site_1.title + '💥', url: site_1.link };
                         } else {
                             buttons.push([
