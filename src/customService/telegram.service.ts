@@ -170,11 +170,6 @@ export class TelegramService {
                 -Para istemek ve para göndermek
                 -Ürün satışı yapmak</strong>
             `
-            const delay: number = 12 * 60 * 60
-
-            setTimeout(async () => {
-                this.bot.sendMessage(chatId, warning_message, { parse_mode: 'HTML' })
-            }, delay * 1000)
         })
 
         this.bot.on('polling_error', (err) => {
